@@ -14,7 +14,6 @@ class HitCounter extends HTMLElement {
     super();
     this.attachShadow({ mode: 'open', delegatesFocus: true });
     this.render = this.render.bind(this);
-    this.setProps(this._attrs);
   }
 
   static get observedAttributes(): (keyof HitCounterAttributes)[] {
@@ -25,29 +24,61 @@ class HitCounter extends HTMLElement {
     this.render();
   }
 
+  /**
+   * Set the properties of the component.
+   * @param _attrs - The attributes to set.
+   */
   private setProps(_attrs: HitCounterAttributes) {
     for (const [key, value] of Object.entries(_attrs)) {
       switch (key) {
         case 'value':
-          this.setAttribute('value', this.validateValue(value));
+          const current = this.getAttribute(key);
+          const nextStr = this.validateValue(value);
+          this._attrs[key] = nextStr;
+          if (current !== nextStr) this.setAttribute(key, nextStr);
           break;
         case 'is-negative':
         case 'visitors':
         case 'is-retro':
-          this.toggleAttribute(key);
+          if (typeof value === 'boolean') {
+            this.toggleAttribute(key, value);
+          } else {
+            this.removeAttribute(key);
+          }
           break;
         default:
-          this._attrs[key as keyof HitCounterAttributes] = value || undefined;
+          
+          if (value == null) {
+            this.removeAttribute(key);
+          }
       }
     }
   }
 
+  /**
+   * Handle the attribute changes.
+   * @param name - The name of the attribute.
+   * @param oldValue - The old value of the attribute.
+   * @param newValue - The new value of the attribute.
+   */
   attributeChangedCallback(name: keyof HitCounterAttributes, oldValue: string | null, newValue: string | null) {
-    if (oldValue !== newValue) {
-      // @ts-ignore
-      this._attrs[name] = newValue || undefined;
+    if (oldValue === newValue) return;
+    switch (name) {
+      case 'visitors':
+      case 'is-retro':
+      case 'is-negative':
+        this._attrs[name] = newValue !== null;
+        break;
+      default:
+        if (newValue === null) {
+          delete (this._attrs as any)[name];
+          return;
+        } 
+        (this._attrs as any)[name] = newValue;
+        break;
     }
     this.setProps(this._attrs);
+    this.render();
   }
 
   get id() {
@@ -56,6 +87,10 @@ class HitCounter extends HTMLElement {
 
   get value() {
     return this.getAttribute('value') || '0';
+  }
+
+  set value(value: string) {
+    this.setAttribute('value', this.validateValue(value));
   }
 
   get isNegative() {
@@ -103,6 +138,9 @@ class HitCounter extends HTMLElement {
     return Math.abs(numValue).toString();
   }
 
+  /**
+   * Render the component.
+   */
   render() {
     const id = this.id;
     const value = this.validateValue(this.value);
@@ -124,7 +162,6 @@ class HitCounter extends HTMLElement {
 
         :host {
           color-scheme: light;
-          display: inline-block;
           font-family: 'Noto Sans', 'Roboto', sans-serif;
           font-weight: 500;
           color: var(--hit-counter-color, #333);
@@ -132,15 +169,15 @@ class HitCounter extends HTMLElement {
           line-height: 1.2;
         }
 
-        :host([is-retro]),
+        :host([is-retro]) {
+          font: bold 1em/1.2 'Fira Code', 'Monaco', monospace;
+        }
+        
         :host([is-retro]) .digit,
         :host([is-retro]) .separator {
-         font: bold 1em/1.2 'Fira Code', 'Monaco', monospace;
           position: relative;
-          display: inline-block;
           width: 1em;
           height: 1.2em;
-          text-align: center;
           background: linear-gradient(135deg, var(--hit-counter-bg-light, #e0e0e0), var(--hit-counter-bg-dark, #707070));
           border: 2px outset var(--hit-counter-border-color, #c0c0c0);
           border-radius: 4px;
@@ -162,23 +199,26 @@ class HitCounter extends HTMLElement {
           pointer-events: none;
         }
   
-        :host([is-negative]) .start-slot,
+        :host([is-negative]) slot.start-slot,
         :host([is-negative]) slot[name="start"] {
-          display: inline-block;
           color: var(--hit-counter-negative-color, #e74c3c);
           font-weight: 600;
         }
 
         :host([visitors]) slot[name="end"],
         :host([visitors]) .end-slot {
-          color: var(--hit-counter-label-color, #666);
+          color: var(--hit-counter-text-color, #666);
           font-weight: 400;
           font-size: 0.9em;
         }
 
-        /* Retro variant dark mode */
+       /* Retro variant dark mode */
         @media (prefers-color-scheme: dark) {
+          :host {
+            color: invert(var(--hit-counter-text-color, #333));
+          }
           :host([is-retro]) {
+            color-scheme: dark;
             --hit-counter-bg-light: #2a2a2a;
             --hit-counter-bg-dark: #0a0a0a;
             --hit-counter-border-color: #404040;
@@ -210,11 +250,11 @@ class HitCounter extends HTMLElement {
           :host([slot="start"]), :host([slot[name="start"]]), :host([slot="end"]), :host([slot[name="end"]]) {
             color: CanvasText;
           }
-        
         }
+      }
       </style>
       
-      <div id="inner-${id}" data-testid="test-${this.getAttribute('id')}" class="counter-container" role="text" aria-label="${this.getAriaLabel()}">
+      <div id="inner-${id}" data-testid="test-${this.id}" class="counter-container" role="text" aria-label="${this.getAriaLabel()}">
           ${showNegativeSign ? '<slot class="start-slot" name="start" aria-hidden>-</slot>' : ''}
           <slot>${displayedValue}</slot>
           ${visitors ? `<slot class="end-slot" name="end" aria-hidden>${visitors}</slot>` : ''}
@@ -238,10 +278,6 @@ class HitCounter extends HTMLElement {
     return numericValue !== 0 ? ` ${numericValue} ${result}` : '0 visitors';
   }
 
-  set value(value: string) {
-    this.setAttribute('value', this.validateValue(value));
-  }
-
   toggleNegative() {
     this.toggleAttribute('is-negative');
   }
@@ -257,4 +293,3 @@ class HitCounter extends HTMLElement {
 
 export default HitCounter;
 
-customElements.define('hit-counter', HitCounter);

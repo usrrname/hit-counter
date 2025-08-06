@@ -47,7 +47,7 @@ hit-counter {
   --hit-counter-color: #333;              /* Main text color */
   --hit-counter-font-size: 1.25rem;       /* Font size */
   --hit-counter-negative-color: #e74c3c;  /* Negative sign color */
-  --hit-counter-label-color: #666;        /* "visitors" label color */
+  --hit-counter-text-color: #666;        /* "visitors" label color */
 }
 ```
 
@@ -60,7 +60,7 @@ hit-counter {
   
   /* Digit styling */
   --border-color: #c0c0c0;                  /* Digit border */
-  --text-color: #000;                       /* Digit text */
+  --digit-color: #000;                       /* Digit text */
   --text-glow: 1px 1px 0 #fff, -1px -1px 0 #404040; /* Text shadow */
   
   /* Shadow effects */
@@ -79,7 +79,7 @@ Dark mode automatically applies these values when `is-retro` is enabled:
 ```css
 /* Matrix green terminal theme */
 --hit-counter-bg-light: #2a2a2a;
---text-color: #00ff00;
+--digit-color: #00ff00;
 --text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
 --outer-glow: 0 0 10px rgba(0,255,0,0.2);
 ```

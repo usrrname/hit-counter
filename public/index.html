@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,7 @@
             --hit-counter-color: #333;
             --hit-counter-font-size: 1.25rem;
             --hit-counter-negative-color: #e74c3c;
-            --hit-counter-label-color: #666;
+            --hit-counter-text-color: #666;
             --hit-counter-bg-light: #e0e0e0;
             --hit-counter-bg-dark: #707070;
             --hit-counter-border-color: #c0c0c0;
@@ -22,7 +21,7 @@
             }
             .counter-display {
                 color-scheme: inherit;
-                background-color: #e0e0e0;
+                background-color: inherit;
                 color: #333;
             }
         }
@@ -45,7 +44,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--text-color);
+            color: var(--digit-color);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 2rem;
@@ -79,10 +78,13 @@
                 background: linear-gradient(135deg, #393535 0%, #2a2a2a 100%);
             }
 
-        .header {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white;
-        }
+            .header {
+                background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+                color: white;
+            }
+            p {
+                color: white;
+            }
         }
         .content {
             padding: 3rem 2rem;
@@ -132,7 +134,7 @@
             margin: 1.5rem 0;
             text-align: center;
             padding: 1.5rem;
-            background: white;
+            background: inherit;
             border-radius: 8px;
             border: 1px solid #e2e8f0;
             min-height: 80px;
@@ -384,12 +386,9 @@
 
                         <div class="control-group">
                             <label>
-                                <input type="checkbox" id="darkModeCheck"> Dark mode
+                                <input type="checkbox" id="darkModeCheck" onchange="toggleColorScheme(this.checked)"> Dark mode
                             </label>
                         </div>
-
-                   
-                            <button onclick="randomize(e)">🎲 Random</button>
                         </form>
                     </div>
 
@@ -425,55 +424,48 @@
                     </div>
 
                     <div class="demo-card">
-                        <h3>🚀 Zero to Hero</h3>
+                        <h3>🚀 1 visitor</h3>
                         <div class="counter-display">
-                            <hit-counter id="zero-visitors-2" value="0" visitors="true"></hit-counter>
-                            <br><br>
-                            <hit-counter id="one-visitor" value="1" visitors="true"></hit-counter>
+                      
+                            <hit-counter id="1-visitor" value="1" visitors="true"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="0" visitors="true"&gt;&lt;/hit-counter&gt;
+                        <div class="code-block"><br/>
+                            &lt;hit-counter id="1-visitor" value="1" visitors="true"&gt;&lt;/hit-counter&gt;
                         </div>
                         <p>Handles singular/plural correctly</p>
                     </div>
 
                     <div class="demo-card">
-                        <h3>⚡ Invalid Input</h3>
+                        <h3>⚡ Invalid Inputs</h3>
                         <div class="counter-display">
                             <hit-counter id="invalid-input" value="invalid" visitors="true"></hit-counter>
-                            <br><br>
+                            <br><br/>
                             <hit-counter id="empty-input" value="" visitors="true"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="invalid"
-                            visitors="true"&gt;&lt;/hit-counter&gt;</div>
-                        <p>Graceful error handling</p>
-                    </div>
-
-                    <div class="demo-card">
-                        <h3>🎯 Accessibility Demo</h3>
-                        <div class="counter-display">
-                            <hit-counter id="accessibility-things" value="1234" visitors="true"></hit-counter>
+                        <div class="code-block">&lt;hit-counter value="invalid" visitors="true"&gt;&lt;/hit-counter&gt;
+                            <br>
+                            &lt;hit-counter value="" visitors="true"&gt;&lt;/hit-counter&gt;
                         </div>
-                        <div class="code-block">Screen reader: "1,234 visitors"</div>
-                        <p>ARIA labels for accessibility</p>
+                        <p>Graceful error handling</p>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
     <!-- Component Script -->
-    <script type="module" src="/dist/component/hit-counter.js"></script>
+ <script type="module" src="./component/index.js"></script>
 
     <script>
-
+        function toggleColorScheme(e) {
+            const darkMode = e
+            document.body.style.colorScheme = darkMode ? 'dark' : 'light';
+        }
         function updateDemo() {
             const counter = document.getElementById('demoCounter');
             const form = document.getElementById('demoForm');
 
             const value = form.valueInput.value;
-            console.log('form value', value);
 
             const isNegative = form.negativeCheck.checked;
 
@@ -481,34 +473,15 @@
 
             const showRetro = form.retroCheck.checked; 
 
-            const darkMode = form.darkModeCheck.checked;
-            if (darkMode) {
-                document.body.style.colorScheme = 'dark';
-            } else {
-                document.body.style.colorScheme = 'light';
-            }
             if (counter) {
                 counter.setAttribute('value', value);
                 counter.toggleAttribute('is-negative', isNegative);
                 counter.toggleAttribute('visitors', showVisitors);
                 counter.toggleAttribute('is-retro', showRetro);
-                // re-render the component
-                counter.render()
             }
            
             // Update code display
             updateCodeBlock();
-        }
-
-        function randomize(e) {
-            e.preventDefault();
-            console.log('randomize');
-            document.getElementById('valueInput').value = Math.floor(Math.random() * 9999999);
-            document.getElementById('negativeCheck').checked = Math.random() > 0.5;
-            document.getElementById('visitorsCheck').checked = Math.random() > 0.3;
-            document.getElementById('retroCheck').checked = Math.random() > 0.5;
-
-            updateDemo();
         }
 
         function updateCodeBlock() {
@@ -554,5 +527,4 @@
 
     </script>
 </body>
-
 </html>

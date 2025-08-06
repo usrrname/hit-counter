@@ -7,14 +7,14 @@
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "start:client": "pnpx http-server public",
+    "start:client": "pnpx http-server -p 3000 -o",
     "start:server": "node dist/service/api.js --watch",
     "build": "tsc",
     "dev": "tsc --watch src/index.ts",
     "lint": "tsc --noEmit",
     "test": "playwright test",
     "clean": "rimraf ./dist ./node_modules",
-    "rebuild": "rimraf ./dist && tsc"
+    "rebuild": "rimraf ./dist && tsc && cp -r dist/component public"
   },
   "keywords": [
     "web-component",
