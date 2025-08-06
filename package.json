@@ -1,0 +1,42 @@
+{
+  "name": "hit-counter",
+  "version": "0.0.0",
+  "description": "A web component and service for site hit visits",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "start:client": "pnpx http-server public",
+    "start:server": "node dist/service/api.js --watch",
+    "build": "tsc",
+    "dev": "tsc --watch src/index.ts",
+    "lint": "tsc --noEmit",
+    "test": "playwright test",
+    "clean": "rimraf ./dist ./node_modules",
+    "rebuild": "rimraf ./dist && tsc"
+  },
+  "keywords": [
+    "web-component",
+    "counter",
+    "typescript",
+    "90s"
+  ],
+  "author": "usrrname",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/express": "^5.0.3",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^24.2.0",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "jsdom": "^26.1.0",
+    "playwright": "^1.54.2",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.9.2"
+  },
+  "dependencies": {
+    "googleapis": "^155.0.0"
+  }
+}

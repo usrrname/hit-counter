@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦔 SiteHit Counter</title>
+    <style>
+        :root {
+            --hit-counter-color: #333;
+            --hit-counter-font-size: 1.25rem;
+            --hit-counter-negative-color: #e74c3c;
+            --hit-counter-label-color: #666;
+            --hit-counter-bg-light: #e0e0e0;
+            --hit-counter-bg-dark: #707070;
+            --hit-counter-border-color: #c0c0c0;
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                color-scheme: light;
+            }
+            .counter-display {
+                color-scheme: inherit;
+                background-color: #e0e0e0;
+                color: #333;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                color-scheme: dark;
+            }
+            .container {
+                color-scheme: inherit;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: light-dark(white, #1a1a1a);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        .header { 
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(135deg, #393535 0%, #2a2a2a 100%);
+            }
+
+        .header {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+        }
+        }
+        .content {
+            padding: 3rem 2rem;
+        }
+
+        .demo-section {
+            margin-bottom: 3rem;
+        }
+
+        .demo-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #6366f1;
+            border-bottom: 3px solid #6366f1;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .demo-card {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            background: light-dark(white, #1a1a1a);
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-color: #6366f1;
+        }
+
+        .demo-card h3 {
+            margin-bottom: 1rem;
+            color: #334155;
+            font-size: 1.2rem;
+        }
+
+        .counter-display {
+            margin: 1.5rem 0;
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            color: #f8f8f2;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Fira Code', 'Monaco', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-top: 1rem;
+        }
+
+        /* Interactive controls */
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: #334155;
+        }
+
+        .control-group input,
+        .control-group select {
+            padding: 0.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: white;
+        }
+
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦔 Hit Counter Component</h1>
+            <p>90s beveled digits with web component magic!</p>
+            <p>A service and component you totally need to use on your website.</p>
+        </div>
+
+        <div class="content">
+            <!-- Basic Examples -->
+            <div class="demo-section">
+                <h2>✨ Basic Usage</h2>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h3>📊 Headless Counter</h3>
+                        <div class="counter-display">
+                            <hit-counter value="1234"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="1234"&gt;&lt;/hit-counter&gt;</div>
+                        <p>Why you'd want this, I don't know. Some of you are boring I guess.</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>⚠️ Negative Value</h3>
+                        <div class="counter-display">
+                            <hit-counter value="1234" is-negative="true"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="1234"
+                            is-negative="true"&gt;&lt;/hit-counter&gt;</div>
+                        <p>Shows negative sign when needed</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>👥 Show Visitors</h3>
+                        <div class="counter-display">
+                            <hit-counter value="1234" visitors="true"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="1234" visitors="true"&gt;&lt;/hit-counter&gt;
+                        </div>
+                        <p>Includes descriptive "visitors" text</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>🌟 Full Configuration</h3>
+                        <div class="counter-display">
+                            <hit-counter value="1234" is-negative="true" visitors="true"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="1234" is-negative="true"
+                            visitors="true"&gt;&lt;/hit-counter&gt;</div>
+                        <p>All features combined</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Retro Styling Demo -->
+            <div class="demo-section">
+                <h2>📺 90s Retro Styling</h2>
+                <p>Enable <code>is-retro</code> for that authentic beveled digit experience!</p>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h3>🟢 Matrix Terminal</h3>
+                        <div class="counter-display" style="background: #000; padding: 1rem; border-radius: 8px;">
+                            <hit-counter value="1337" is-retro="true" visitors="true"
+                                style="--hit-counter-bg-light: #2a2a2a; --hit-counter-bg-dark: #0a0a0a; --hit-counter-text-color: #00ff00; --hit-counter-color: #00ff00;"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="1337" is-retro="true"
+                            visitors="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
+                            #2a2a2a;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
+                            #0a0a0a;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
+                            #00ff00;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
+                            #00ff00;"&gt;</div>
+                        <p>Green terminal vibes with glowing digits</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>🔴 Terminator HUD</h3>
+                        <div class="counter-display" style="background: #330000; padding: 1rem; border-radius: 8px;">
+                            <hit-counter value="2029" is-retro="true" is-negative="true"
+                                style="--hit-counter-bg-light: #660000; --hit-counter-bg-dark: #220000; --hit-counter-text-color: #ff4444; --hit-counter-color: #ff4444; --hit-counter-negative-color: #ff6666;"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="2029" is-retro="true"
+                            is-negative="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
+                            #660000;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
+                            #220000;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
+                            #ff4444;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
+                            #ff4444;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-negative-color:
+                            #ff6666;"&gt;</div>
+                        <p>Red sci-fi interface with negative value</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>🟡 Amber CRT Monitor</h3>
+                        <div class="counter-display" style="background: #2a1f00; padding: 1rem; border-radius: 8px;">
+                            <hit-counter value="1985" is-retro="true" visitors="true"
+                                style="--hit-counter-bg-light: #aa6600; --hit-counter-bg-dark: #442200; --hit-counter-text-color: #ffaa00; --hit-counter-color: #ffaa00;"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="1985" is-retro="true"
+                            visitors="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
+                            #aa6600;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
+                            #442200;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
+                            #ffaa00;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
+                            #ffaa00;"&gt;</div>
+                        <p>Classic amber terminal aesthetic</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>⚪ Default Retro</h3>
+                        <div class="counter-display">
+                            <hit-counter value="98765" is-retro="true"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="98765" is-retro="true"&gt;</div>
+                        <p>Classic beveled buttons with automatic comma formatting</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>🌈 Custom Theme</h3>
+                        <div class="counter-display"
+                            style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem; border-radius: 8px;">
+                            <hit-counter value="80085" is-retro="true" visitors="true"
+                                style="--hit-counter-bg-light: #e6e6fa; --hit-counter-bg-dark: #9370db; --hit-counter-text-color: #4b0082; --hit-counter-color: #ffffff;"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="80085" is-retro="true"
+                            visitors="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
+                            #e6e6fa;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
+                            #9370db;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
+                            #4b0082;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
+                            #ffffff;"&gt;</div>
+                        <p>Purple gradient with custom CSS variables</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>⚡ Large Retro Display</h3>
+                        <div class="counter-display">
+                            <hit-counter value="42000" is-retro="true"
+                                style="--hit-counter-font-size: 2rem; font-size: 2rem;"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="42000"
+                            is-retro="true"<br>&nbsp;&nbsp;style="--hit-counter-font-size:
+                            2rem;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 2rem;"&gt;</div>
+                        <p>Scaled up for maximum retro impact</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Demo -->
+            <div class="demo-section">
+                <h2>🧪 Play with the Component!</h2>
+                <div style="background: #f1f5f9; padding: 2rem; border-radius: 12px;">
+
+                    <form id="demoForm" onsubmit="(e) => e.preventDefault();">
+                    <div class="controls">
+                        <div class="control-group">
+                            <label>Counter Value</label>
+                            <input type="number" id="valueInput" value="42" min="0" onchange="updateDemo()">
+                        </div>
+
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="negativeCheck"> Show negative
+                            </label>
+                        </div>
+
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="visitorsCheck" checked> Show visitors
+                            </label>
+                        </div>
+
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="retroCheck"> Show retro styling
+                            </label>
+                        </div>
+
+                        <div class="control-group">
+                            <label>
+                                <input type="checkbox" id="darkModeCheck"> Dark mode
+                            </label>
+                        </div>
+
+                   
+                            <button onclick="randomize(e)">🎲 Random</button>
+                        </form>
+                    </div>
+
+                    <div class="counter-display" id="demoContainer">
+                        <hit-counter id="demoCounter" value="42"></hit-counter>
+                    </div>
+
+                    <div class="code-block" id="codeDisplay">&lt;hit-counter value="42" &gt;&lt;/hit-counter&gt;</div>
+                   
+                </div>
+            </div>
+
+            <!-- Edge Cases & Special Numbers -->
+            <div class="demo-section">
+                <h2>🌈 Edge Cases & Fun Examples</h2>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h3>🔢 Large Numbers</h3>
+                        <div class="counter-display">
+                            <hit-counter id="large-number-counter" value="9876543210"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="9876543210"&gt;&lt;/hit-counter&gt;</div>
+                        <p>Automatic comma formatting!</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>🔄 0 Visitors</h3>
+                        <div class="counter-display">
+                            <hit-counter id="zero-visitors" value="0"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="0"&gt;&lt;/hit-counter&gt;</div>
+                        <p>Special handling for zero values</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>🚀 Zero to Hero</h3>
+                        <div class="counter-display">
+                            <hit-counter id="zero-visitors-2" value="0" visitors="true"></hit-counter>
+                            <br><br>
+                            <hit-counter id="one-visitor" value="1" visitors="true"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="0" visitors="true"&gt;&lt;/hit-counter&gt;
+                        </div>
+                        <p>Handles singular/plural correctly</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>⚡ Invalid Input</h3>
+                        <div class="counter-display">
+                            <hit-counter id="invalid-input" value="invalid" visitors="true"></hit-counter>
+                            <br><br>
+                            <hit-counter id="empty-input" value="" visitors="true"></hit-counter>
+                        </div>
+                        <div class="code-block">&lt;hit-counter value="invalid"
+                            visitors="true"&gt;&lt;/hit-counter&gt;</div>
+                        <p>Graceful error handling</p>
+                    </div>
+
+                    <div class="demo-card">
+                        <h3>🎯 Accessibility Demo</h3>
+                        <div class="counter-display">
+                            <hit-counter id="accessibility-things" value="1234" visitors="true"></hit-counter>
+                        </div>
+                        <div class="code-block">Screen reader: "1,234 visitors"</div>
+                        <p>ARIA labels for accessibility</p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Component Script -->
+    <script type="module" src="/dist/component/hit-counter.js"></script>
+
+    <script>
+
+        function updateDemo() {
+            const counter = document.getElementById('demoCounter');
+            const form = document.getElementById('demoForm');
+
+            const value = form.valueInput.value;
+            console.log('form value', value);
+
+            const isNegative = form.negativeCheck.checked;
+
+            const showVisitors = form.visitorsCheck.checked; 
+
+            const showRetro = form.retroCheck.checked; 
+
+            const darkMode = form.darkModeCheck.checked;
+            if (darkMode) {
+                document.body.style.colorScheme = 'dark';
+            } else {
+                document.body.style.colorScheme = 'light';
+            }
+            if (counter) {
+                counter.setAttribute('value', value);
+                counter.toggleAttribute('is-negative', isNegative);
+                counter.toggleAttribute('visitors', showVisitors);
+                counter.toggleAttribute('is-retro', showRetro);
+                // re-render the component
+                counter.render()
+            }
+           
+            // Update code display
+            updateCodeBlock();
+        }
+
+        function randomize(e) {
+            e.preventDefault();
+            console.log('randomize');
+            document.getElementById('valueInput').value = Math.floor(Math.random() * 9999999);
+            document.getElementById('negativeCheck').checked = Math.random() > 0.5;
+            document.getElementById('visitorsCheck').checked = Math.random() > 0.3;
+            document.getElementById('retroCheck').checked = Math.random() > 0.5;
+
+            updateDemo();
+        }
+
+        function updateCodeBlock() {
+            const counter = document.getElementById('demoCounter');
+
+            if (!counter) {
+                console.error('❌ Counter element not found in updateCodeBlock!');
+                return;
+            }
+
+            let code = '&lt;hit-counter';
+            code += ` value="${counter.getAttribute('value')}"`;
+
+            if (counter.hasAttribute('is-negative')) {
+                code += ' is-negative="true"';
+            }
+            if (counter.hasAttribute('visitors')) {
+                code += ' visitors="true"';
+            }
+            if (counter.hasAttribute('is-retro')) {
+                code += ' is-retro="true"';
+            }
+            code += '&gt;&lt;/hit-counter&gt;';
+
+            document.getElementById('codeDisplay').innerHTML = code;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('🚀 DOM loaded, waiting for hit-counter...');
+
+            await customElements.whenDefined('hit-counter');
+            console.log('✅ hit-counter custom element mounted');
+
+            const demoCounter = document.getElementById('demoCounter')
+
+            document.getElementById('valueInput').addEventListener('input', updateDemo);
+            document.getElementById('negativeCheck').addEventListener('change', updateDemo);
+            document.getElementById('visitorsCheck').addEventListener('change', updateDemo);
+            document.getElementById('retroCheck').addEventListener('change', updateDemo);
+
+            updateDemo();
+        });
+
+    </script>
+</body>
+
+</html>

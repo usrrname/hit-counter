@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🦔 Analytics Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .counter {
+            font-size: 4rem;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            background: #3b82f6;
+            color: white;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 0.5rem;
+        }
+
+        button:hover {
+            background: #2563eb;
+        }
+
+        .status {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .status.success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.error {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .setup-info {
+            background: #e2e8f0;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .setup-info h4 {
+            margin-top: 0;
+        }
+
+        .setup-info ol {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🦔 Simple Analytics Demo</h1>
+    <p>All-time unique visitors from Google Analytics</p>
+
+    <div class="counter">
+        <hit-counter id="visitorCounter" value="0" visitors="true" is-retro="true"></hit-counter>
+    </div>
+    <div id="status" class="status"></div>
+    <button onclick="fetchVisitors()">📊 Fetch Visitors</button>
+
+    <!-- Load the hit counter component -->
+    <script type="module" src="../dist/component/hit-counter.js"></script>
+
+    <script>
+        function updateStatus(message, type) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.classList.add(type);
+        }
+
+        async function fetchVisitors() {
+
+            try {
+                const response = await fetch('http://localhost:3000/api');
+                const visitors = await response.json();
+                console.log(`🦔 visitors: ${visitors.visitors}`);
+                document.getElementById('visitorCounter').setAttribute('value', visitors.toString());
+                updateStatus(`✅ Updated: ${visitors.toLocaleString()} unique visitors`, 'success');
+
+            } catch (error) {
+                console.error('❌ Error fetching visitors:', error);
+                updateStatus('❌ Failed to fetch visitors', 'error');
+            }
+        }
+    </script>
+</body>
+
+</html>
