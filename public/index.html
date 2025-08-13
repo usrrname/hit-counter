@@ -11,8 +11,8 @@
             --hit-counter-negative-color: #e74c3c;
             --hit-counter-text-color: #666;
             --hit-counter-bg-light: #e0e0e0;
-            --hit-counter-bg-dark: #707070;
-            --hit-counter-border-color: #c0c0c0;
+            --hit-counter-bg-dark: #d9d6d6;
+            --hit-counter-border-color: #2c2b2b;
         }
 
         @media (prefers-color-scheme: light) {
@@ -21,7 +21,7 @@
             }
             .counter-display {
                 color-scheme: inherit;
-                background-color: inherit;
+                background-color: light-dark(#e0e0e0, #2a2a2a);
                 color: #333;
             }
         }
@@ -226,7 +226,7 @@
                     <div class="demo-card">
                         <h3>📊 Headless Counter</h3>
                         <div class="counter-display">
-                            <hit-counter value="1234"></hit-counter>
+                            <hit-counter id="basic-counter" value="1234"></hit-counter>
                         </div>
                         <div class="code-block">&lt;hit-counter value="1234"&gt;&lt;/hit-counter&gt;</div>
                         <p>Why you'd want this, I don't know. Some of you are boring I guess.</p>
@@ -235,7 +235,7 @@
                     <div class="demo-card">
                         <h3>⚠️ Negative Value</h3>
                         <div class="counter-display">
-                            <hit-counter value="1234" is-negative="true"></hit-counter>
+                            <hit-counter id="negative-counter" value="1234" is-negative="true"></hit-counter>
                         </div>
                         <div class="code-block">&lt;hit-counter value="1234"
                             is-negative="true"&gt;&lt;/hit-counter&gt;</div>
@@ -245,7 +245,7 @@
                     <div class="demo-card">
                         <h3>👥 Show Visitors</h3>
                         <div class="counter-display">
-                            <hit-counter value="1234" visitors="true"></hit-counter>
+                            <hit-counter id="visitors-counter" value="1234" visitors="true"></hit-counter>
                         </div>
                         <div class="code-block">&lt;hit-counter value="1234" visitors="true"&gt;&lt;/hit-counter&gt;
                         </div>
@@ -255,7 +255,7 @@
                     <div class="demo-card">
                         <h3>🌟 Full Configuration</h3>
                         <div class="counter-display">
-                            <hit-counter value="1234" is-negative="true" visitors="true"></hit-counter>
+                            <hit-counter id="full-config" value="1234" is-negative="true" visitors="true"></hit-counter>
                         </div>
                         <div class="code-block">&lt;hit-counter value="1234" is-negative="true"
                             visitors="true"&gt;&lt;/hit-counter&gt;</div>
@@ -318,7 +318,7 @@
                     <div class="demo-card">
                         <h3>⚪ Default Retro</h3>
                         <div class="counter-display">
-                            <hit-counter value="98765" is-retro="true"></hit-counter>
+                            <hit-counter id="default-retro-counter" value="98765" is-retro="true"></hit-counter>
                         </div>
                         <div class="code-block">&lt;hit-counter value="98765" is-retro="true"&gt;</div>
                         <p>Classic beveled buttons with automatic comma formatting</p>
@@ -328,7 +328,7 @@
                         <h3>🌈 Custom Theme</h3>
                         <div class="counter-display"
                             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem; border-radius: 8px;">
-                            <hit-counter value="80085" is-retro="true" visitors="true"
+                            <hit-counter id="custom-theme-counter" value="80085" is-retro="true" visitors="true"
                                 style="--hit-counter-bg-light: #e6e6fa; --hit-counter-bg-dark: #9370db; --hit-counter-text-color: #4b0082; --hit-counter-color: #ffffff;"></hit-counter>
                         </div>
                         <div class="code-block">&lt;hit-counter value="80085" is-retro="true"
@@ -343,7 +343,7 @@
                     <div class="demo-card">
                         <h3>⚡ Large Retro Display</h3>
                         <div class="counter-display">
-                            <hit-counter value="42000" is-retro="true"
+                            <hit-counter id="large-retro-counter" value="42000" is-retro="true"
                                 style="--hit-counter-font-size: 2rem; font-size: 2rem;"></hit-counter>
                         </div>
                         <div class="code-block">&lt;hit-counter value="42000"
@@ -357,7 +357,7 @@
             <!-- Interactive Demo -->
             <div class="demo-section">
                 <h2>🧪 Play with the Component!</h2>
-                <div style="background: #f1f5f9; padding: 2rem; border-radius: 12px;">
+                <div class="counter-display">
 
                     <form id="demoForm" onsubmit="(e) => e.preventDefault();">
                     <div class="controls">
