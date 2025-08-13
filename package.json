@@ -13,7 +13,7 @@
     "build": "tsc",
     "dev": "tsc --watch src/index.ts",
     "lint": "tsc --noEmit",
-    "test": "playwright test",
+    "test": "pnpm exec playwright test",
     "clean": "rimraf ./dist ./node_modules",
     "rebuild": "rimraf ./dist && tsc && cp -r dist/component public"
   },
