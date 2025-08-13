@@ -75,3 +75,4 @@ logs/
 /playwright/.cache/
 ga-credentials.json
 response.json
+public/component/*
