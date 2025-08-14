@@ -26,7 +26,6 @@ const analytics = new AnalyticsService(
 app.get('/api', async (req, res) => {
     try {
         const visitors = await analytics.getUniqueVisitors();
-        console.log(`🦔 response:`, visitors);
         res.json({ visitors });
     } catch (error) {
         console.error('❌ Analytics API error:', error);
