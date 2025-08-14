@@ -51,7 +51,7 @@ test('should display a minus sign to the hit counter when is-negative is supplie
   await expect(counter.locator('slot[name="start"]')).toHaveText('-');
 });
 
-test('renders the hit counter when visitor attribute exists with a value ', async () => {
+test('renders the hit counter when visitor attribute exists with a value ', async ({page}) => {
   counter = page.locator('hit-counter#playwright-component');
   await counter.evaluate(async (el: HTMLElement) => {
     await el.setAttribute('value', '100');
