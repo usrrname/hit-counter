@@ -10,7 +10,7 @@
 ```
 
 `pnpm start:client` to view component variants
-`pnpm start:server` to start the server :construction:
+`pnpm start:server` to start the server
 
 ## 📖 Usage
 
@@ -92,7 +92,7 @@ counter.toggleNegative();
 counter.toggleVisitors();
 counter.toggleRetro();
 
-HitCounter.render(); // re-render the component
+HitCounter.render(); // re-render the component. This is not advised as it can cause performance issues
 
 ```
 
