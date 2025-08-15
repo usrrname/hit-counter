@@ -77,13 +77,13 @@
     <p>All-time unique visitors from Google Analytics</p>
 
     <div class="counter">
-        <hit-counter id="visitorCounter" value="0" visitors="true" is-retro="true"></hit-counter>
+        <hit-counter id="visitorCounter" value="0" visitors is-retro></hit-counter>
     </div>
     <div id="status" class="status"></div>
     <button onclick="fetchVisitors()">📊 Fetch Visitors</button>
 
     <!-- Load the hit counter component -->
-    <script type="module" src="../dist/component/hit-counter.js"></script>
+    <script type="module" src="./component/index.js"></script>
 
     <script>
         function updateStatus(message, type) {
@@ -93,13 +93,18 @@
         }
 
         async function fetchVisitors() {
-
             try {
                 const response = await fetch('http://localhost:3000/api');
-                const visitors = await response.json();
-                console.log(`🦔 visitors: ${visitors.visitors}`);
-                document.getElementById('visitorCounter').setAttribute('value', visitors.toString());
-                updateStatus(`✅ Updated: ${visitors.toLocaleString()} unique visitors`, 'success');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log(`🦔 visitors data:`, data);
+                
+                document.getElementById('visitorCounter').setAttribute('value', data.visitors.toString());
+                updateStatus(`✅ Updated: ${data.visitors.toLocaleString()} unique visitors`, 'success');
 
             } catch (error) {
                 console.error('❌ Error fetching visitors:', error);
