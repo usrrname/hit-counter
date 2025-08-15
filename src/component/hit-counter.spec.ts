@@ -60,9 +60,20 @@ test('renders the hit counter when visitor attribute exists with a value ', asyn
   await expect(counter.locator('slot[name="end"]')).toHaveText('visitors');
 });
 
-test('renders the hit counter when is-retro is supplied', async () => {
-  counter = page.locator('hit-counter#playwright-component');
-  await counter.evaluate(async (el: HTMLElement) => await el.toggleAttribute('is-retro'));
-  await expect(counter).toHaveCSS('background-color', 'rgb(255, 255, 255)');
+  test('renders the hit counter with retro styling and replaced css variables', async ({ page }) => {
+    counter = page.locator('hit-counter#playwright-component');
+    await counter.evaluate(async (el: HTMLElement) => {
+      await el.toggleAttribute('is-retro');
+      await el.setAttribute('value', '1337');
+      await el.setAttribute('visitors', 'true');
+      await el.style.setProperty('--hit-counter-bg-light', '#2a2a2a');
+      await el.style.setProperty('--hit-counter-bg-dark', '#0a0a0a');
+      await el.style.setProperty('--hit-counter-text-color', '#00ff00');
+      await el.style.setProperty('--hit-counter-color', '#00ff00');
+    });
+    await expect(counter).toHaveCSS('--hit-counter-text-color', '#00ff00');
+    await expect(counter).toHaveCSS('--hit-counter-color', '#00ff00');
+    await expect(counter).toHaveCSS('--hit-counter-bg-light', '#2a2a2a');
+    await expect(counter).toHaveCSS('--hit-counter-bg-dark', '#0a0a0a');
 });
 });
