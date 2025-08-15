@@ -14,7 +14,7 @@
         }
 
         .counter {
-            font-size: 4rem;
+            font-size: var(--hit-counter-font-size, 1.2rem);
             margin: 2rem 0;
             padding: 2rem;
             background: #f8fafc;
@@ -81,8 +81,6 @@
     </div>
     <div id="status" class="status"></div>
     <button onclick="fetchVisitors()">📊 Fetch Visitors</button>
-
-    <!-- Load the hit counter component -->
     <script type="module" src="./component/index.js"></script>
 
     <script>
@@ -94,7 +92,11 @@
 
         async function fetchVisitors() {
             try {
-                const response = await fetch('http://localhost:3000/api');
+                const response = await fetch('/api', {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
                 
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

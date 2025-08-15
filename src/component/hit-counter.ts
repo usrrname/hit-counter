@@ -163,13 +163,16 @@ class HitCounter extends HTMLElement {
       /* Retro variant dark mode */
       @media (prefers-color-scheme: dark) {
       :host([is-retro]) {
-        --hit-counter-text-color: #00ff00;
-        --hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
-        --hit-counter-inner-light: rgba(255,255,255,0.1);
-        --hit-counter-inner-dark: rgba(0,0,0,0.8);
-        --hit-counter-outer-glow: 0 0 10px rgba(0,255,0,0.2);
-        --hit-counter-overlay-light: rgba(0,255,0,0.1);
-        --hit-counter-overlay-dark: rgba(0,0,0,0.2);
+        --hit-counter-text-color: var(--hit-counter-text-color, #00ff00);
+        --hit-counter-bg-light: var(--hit-counter-bg-light, #1b1b1b);
+        --hit-counter-bg-dark: var(--hit-counter-bg-dark, #6d6b6b);
+        --hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 var(--hit-counter-text-glow, #00ff00);
+        --hit-counter-inner-light: var(--hit-counter-inner-light, rgba(255,255,255,0.1));
+        --hit-counter-inner-dark: var(--hit-counter-inner-dark, rgba(0,0,0,0.8));
+        --hit-counter-outer-glow: var(--hit-counter-outer-glow, 0 0 10px rgba(0,255,0,0.2));
+        --hit-counter-overlay-light: var(--hit-counter-overlay-light, rgba(0,255,0,0.1));
+        --hit-counter-overlay-dark: var(--hit-counter-overlay-dark, rgba(0,0,0,0.2));
+        --hit-counter-border-color: var(--hit-counter-border-color, rgb(130, 0, 229));
       }
     }
 
@@ -225,7 +228,7 @@ class HitCounter extends HTMLElement {
         :host([visitors]) .end-slot {
           color: var(--hit-counter-text-color, #666);
           font-weight: 400;
-          font-size: 0.9em;
+          font-size: var(--hit-counter-font-size, 1.25rem);
         }
 
         /* Accessibility improvements */

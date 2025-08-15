@@ -5,7 +5,7 @@
 ## 🚀 Quick Start
 
 ```html
-<script type="module" src="dist/component/hit-counter.js"></script>
+<script type="module" src="./component/index.js"></script>
 <hit-counter value="1234"></hit-counter>
 ```
 `pnpm start` to start the server and view the component variants at http://localhost:3000/app.html
@@ -39,37 +39,31 @@
 
 ### CSS Variables
 
-There are 12 variables that can be overridden.
+There are 11 variables to theme the component.
 
 ```css
+/* Basic styling */
 hit-counter {
-  /* Basic styling */
-  --hit-counter-text-color: #333;              /* Main text color */
+  --hit-counter-text-color: #000 | #00ff00;              /* Main text color */
   --hit-counter-font-size: 1.25rem;       /* Font size */
   --hit-counter-negative-color: #e74c3c;  /* Negative sign color */
 }
 ```
 
-### Retro Theme Variables
+### Retro Theme Variables (default light and dark)
 ```css
+  /* Digit styling - light and dark*/
 hit-counter {
-   --hit-counter-text-color: #00ff00;
-
-
-  /* Beveled digit backgrounds */
-  --hit-counter-bg-light: #e0e0e0;                      /* Gradient light */
-  --hit-counter-bg-dark: #707070;                       /* Gradient dark */
-  
-  /* Digit styling */
-  --hit-counter-border-color: #c0c0c0;                  /* Digit border */
-  --hit-counter-digit-color: #000;                       /* Digit text */
+  --hit-counter-bg-light: #e0e0e0 | #1b1b1b;                      /* Gradient light */
+  --hit-counter-bg-dark: #707070 | #6d6b6b;                       /* Gradient dark */
+  --hit-counter-border-color: #c0c0c0 | rgb(130, 0, 229);                  /* Digit border */
   --hit-counter-text-glow: 1px 1px 0 #fff, -1px -1px 0 #404040; /* Text shadow */
   
   /* Shadow effects */
   --hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
   --hit-counter-inner-light: rgba(255,255,255,0.8);     /* Inner light shadow */
   --hit-counter-inner-dark: rgba(0,0,0,0.5);            /* Inner dark shadow */
-  --hit-counter-outer-glow: none;                        /* Outer glow effect */
+  --hit-counter-outer-glow: none | 0 0 10px rgba(0,255,0,0.2);                        /* Outer glow effect */
   
   /* Overlay effects */
   --hit-counter-overlay-light: rgba(255,255,255,0.4);   /* Overlay light */
@@ -84,8 +78,6 @@ const counter = document.querySelector('hit-counter');
 counter.toggleNegative();
 counter.toggleVisitors();
 counter.toggleRetro();
-
-HitCounter.render(); // re-render the component. This is NOT advised as it can cause performance issues
 
 ```
 
