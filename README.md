@@ -1,6 +1,6 @@
 # 🦔 Hit Counter
 
-*A web component and service for displaying site visits* ✨
+*A web component and service for displaying site visits from Google Analytics* ✨
 
 ## 🚀 Quick Start
 
@@ -8,9 +8,9 @@
 <script type="module" src="dist/component/hit-counter.js"></script>
 <hit-counter value="1234"></hit-counter>
 ```
-
-`pnpm start:client` to view component variants
-`pnpm start:server` to start the server
+`pnpm start` to start the server and view the component variants at http://localhost:3000/app.html
+`pnpm start:client` to view the component variants at http://localhost:3000/
+`pnpm start:server` to start the server with the service at http://localhost:3000/api
 
 ## 📖 Usage
 
@@ -31,7 +31,7 @@
 | Attribute     | Type    | Description |
 |---------------|---------|-------------|
 | `value`       | string  | Number to display (auto-formatted) |
-| `is-negative` | boolean | Show minus sign |
+| `is-negative` | boolean | Show minus sign in front of value - just for fun|
 | `visitors`    | boolean | Show "visitors" label |
 | `is-retro`    | boolean | Enable 90s beveled styling |
 
@@ -77,16 +77,6 @@ hit-counter {
 }
 ```
 
-### Dark Mode (Auto-Applied)
-Dark mode automatically applies these values when `is-retro` is enabled:
-```css
-/* Matrix green terminal theme */
---hit-counter-bg-light: #2a2a2a;
---hit-counter-digit-color: #00ff00;
---text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
---outer-glow: 0 0 10px rgba(0,255,0,0.2);
-```
-
 ## 🔧 JavaScript API
 
 ```javascript
@@ -95,7 +85,7 @@ counter.toggleNegative();
 counter.toggleVisitors();
 counter.toggleRetro();
 
-HitCounter.render(); // re-render the component. This is not advised as it can cause performance issues
+HitCounter.render(); // re-render the component. This is NOT advised as it can cause performance issues
 
 ```
 
