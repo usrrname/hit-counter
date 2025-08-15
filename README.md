@@ -39,36 +39,51 @@
 
 ### CSS Variables
 
-There are 11 variables to theme the component.
+There are 13 variables to theme the component.
 
 ```css
 /* Basic styling */
-hit-counter {
   --hit-counter-text-color: #000 | #00ff00;              /* Main text color */
   --hit-counter-font-size: 1.25rem;       /* Font size */
   --hit-counter-negative-color: #e74c3c;  /* Negative sign color */
-}
 ```
 
-### Retro Theme Variables (default light and dark)
+### All variables (defaults)
 ```css
-  /* Digit styling - light and dark*/
-hit-counter {
-  --hit-counter-bg-light: #e0e0e0 | #1b1b1b;                      /* Gradient light */
-  --hit-counter-bg-dark: #707070 | #6d6b6b;                       /* Gradient dark */
-  --hit-counter-border-color: #c0c0c0 | rgb(130, 0, 229);                  /* Digit border */
-  --hit-counter-text-glow: 1px 1px 0 #fff, -1px -1px 0 #404040; /* Text shadow */
-  
-  /* Shadow effects */
-  --hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
-  --hit-counter-inner-light: rgba(255,255,255,0.8);     /* Inner light shadow */
-  --hit-counter-inner-dark: rgba(0,0,0,0.5);            /* Inner dark shadow */
-  --hit-counter-outer-glow: none | 0 0 10px rgba(0,255,0,0.2);                        /* Outer glow effect */
-  
-  /* Overlay effects */
-  --hit-counter-overlay-light: rgba(255,255,255,0.4);   /* Overlay light */
-  --hit-counter-overlay-dark: rgba(0,0,0,0.1);          /* Overlay dark */
-}
+  /* Font styling */
+  --hit-counter-font-size: 1.25rem;
+
+  /* Text effect <light|dark> */
+  --hit-counter-text-color: #000 | #00ff00;
+  --hit-counter-text-glow: none | 0 0 3px currentColor, 1px 1px 0 #00ff00;
+
+  /* Digit styling */
+  --hit-counter-bg-light: #e0e0e0;
+  --hit-counter-bg-dark: #707070;
+  --hit-counter-border-color: #c0c0c0;
+  --hit-counter-overlay-light: rgba(0,255,0,0.1);
+  --hit-counter-overlay-dark: rgba(0,0,0,0.2);
+  --hit-counter-inner-light: rgba(255,255,255,0.8);
+  --hit-counter-inner-dark: rgba(0,0,0,0.5);
+  --hit-counter-outer-glow: none | 0 0 10px rgba(0,255,0,0.2);
+```
+
+### Retro Theme Variables (defaults)
+
+There are 10 variables to theme the retro variant.
+```css
+/* Retro variant dark mode defaults */
+--hit-counter-text-color: var(--hit-counter-text-color, #00ff00);
+--hit-counter-bg-light: var(--hit-counter-bg-light, #1b1b1b);
+--hit-counter-bg-dark: var(--hit-counter-bg-dark, #6d6b6b);
+--hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 var(--hit-counter-text-glow, #00ff00);
+--hit-counter-inner-light: var(--hit-counter-inner-light, rgba(255,255,255,0.1));
+--hit-counter-inner-dark: var(--hit-counter-inner-dark, rgba(0,0,0,0.8));
+--hit-counter-outer-glow: var(--hit-counter-outer-glow, 0 0 10px rgba(0,255,0,0.2));
+--hit-counter-overlay-light: var(--hit-counter-overlay-light, rgba(0,255,0,0.1));
+--hit-counter-overlay-dark: var(--hit-counter-overlay-dark, rgba(0,0,0,0.2));
+--hit-counter-border-color: var(--hit-counter-border-color, rgb(130, 0, 229));
+
 ```
 
 ## 🔧 JavaScript API
@@ -80,10 +95,10 @@ counter.toggleVisitors();
 counter.toggleRetro();
 
 ```
-
 ## 🌟 Browser Support
 
 Modern browsers with Custom Elements v1, Shadow DOM v1, ES6 Classes  
 *(Chrome 54+, Firefox 63+, Safari 10.1+, Edge 79+)*
 
 **Accessibility:** ARIA labels, high contrast support, screen reader friendly
+
