@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🦔 SiteHit Counter</title>
     <style>
-        :root {
-            --hit-counter-color: #333;
-            --hit-counter-font-size: 1.25rem;
-            --hit-counter-negative-color: #e74c3c;
-            --hit-counter-text-color: #666;
-            --hit-counter-bg-light: #e0e0e0;
-            --hit-counter-bg-dark: #d9d6d6;
-            --hit-counter-border-color: #2c2b2b;
-        }
 
         @media (prefers-color-scheme: light) {
             :root {
@@ -44,7 +35,7 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: var(--digit-color);
+            color: var(--hit-counter-digit-color);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 2rem;
@@ -144,14 +135,15 @@
         }
 
         .code-block {
+            display: flex;
             background: #1a1a1a;
             color: #f8f8f2;
             padding: 1rem;
             border-radius: 8px;
             font-family: 'Fira Code', 'Monaco', monospace;
             font-size: 0.9rem;
-            overflow-x: auto;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
+            text-align: left;
         }
 
         /* Interactive controls */
@@ -224,11 +216,11 @@
                 <h2>✨ Basic Usage</h2>
                 <div class="demo-grid">
                     <div class="demo-card">
-                        <h3>📊 Headless Counter</h3>
+                        <h3>📊 Headless</h3>
                         <div class="counter-display">
                             <hit-counter id="basic-counter" value="1234"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="1234"&gt;&lt;/hit-counter&gt;</div>
+                        <code class="code-block">&lt;hit-counter value="1234"&gt;&lt;/hit-counter&gt;</code>
                         <p>Why you'd want this, I don't know. Some of you are boring I guess.</p>
                     </div>
 
@@ -237,8 +229,8 @@
                         <div class="counter-display">
                             <hit-counter id="negative-counter" value="1234" is-negative="true"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="1234"
-                            is-negative="true"&gt;&lt;/hit-counter&gt;</div>
+                        <code class="code-block">&lt;hit-counter value="1234"
+                            is-negative="true"&gt;&lt;/hit-counter&gt;</code>
                         <p>Shows negative sign when needed</p>
                     </div>
 
@@ -247,8 +239,8 @@
                         <div class="counter-display">
                             <hit-counter id="visitors-counter" value="1234" visitors="true"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="1234" visitors="true"&gt;&lt;/hit-counter&gt;
-                        </div>
+                        <code>&lt;hit-counter value="1234" visitors="true"&gt;&lt;/hit-counter&gt;
+                        </code>
                         <p>Includes descriptive "visitors" text</p>
                     </div>
 
@@ -257,8 +249,8 @@
                         <div class="counter-display">
                             <hit-counter id="full-config" value="1234" is-negative="true" visitors="true"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="1234" is-negative="true"
-                            visitors="true"&gt;&lt;/hit-counter&gt;</div>
+                        <code>&lt;hit-counter value="1234" is-negative="true"
+                            visitors="true"&gt;&lt;/hit-counter&gt;</code>
                         <p>All features combined</p>
                     </div>
                 </div>
@@ -273,45 +265,38 @@
                         <h3>🟢 Matrix Terminal</h3>
                         <div class="counter-display" style="background: #000; padding: 1rem; border-radius: 8px;">
                             <hit-counter value="1337" is-retro="true" visitors="true"
-                                style="--hit-counter-bg-light: #2a2a2a; --hit-counter-bg-dark: #0a0a0a; --hit-counter-text-color: #00ff00; --hit-counter-color: #00ff00;"></hit-counter>
+                                style="--hit-counter-bg-light: #2a2a2a; --hit-counter-bg-dark: #0a0a0a; --hit-counter-text-color: #00ff00;"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="1337" is-retro="true"
-                            visitors="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
-                            #2a2a2a;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
-                            #0a0a0a;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
-                            #00ff00;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
-                            #00ff00;"&gt;</div>
-                        <p>Green terminal vibes with glowing digits</p>
+                        <code class="code-block">&lt;hit-counter value="1337" is-retro="true" visitors="true" <br>&nbsp;&nbsp;style="--hit-counter-bg-light: #2a2a2a; --hit-counter-bg-dark: #0a0a0a; --hit-counter-text-color:
+                         #00ff00;"&gt;</code>
                     </div>
 
                     <div class="demo-card">
                         <h3>🔴 Terminator HUD</h3>
                         <div class="counter-display" style="background: #330000; padding: 1rem; border-radius: 8px;">
                             <hit-counter value="2029" is-retro="true" is-negative="true"
-                                style="--hit-counter-bg-light: #660000; --hit-counter-bg-dark: #220000; --hit-counter-text-color: #ff4444; --hit-counter-color: #ff4444; --hit-counter-negative-color: #ff6666;"></hit-counter>
+                            style="--hit-counter-bg-light: #660000; --hit-counter-bg-dark: #220000; --hit-counter-text-color: #ff4444; --hit-counter-negative-color: #ff6666;
+                            --hit-counter-border-color: #ef9cbe;"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="2029" is-retro="true"
-                            is-negative="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
-                            #660000;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
-                            #220000;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
-                            #ff4444;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
-                            #ff4444;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-negative-color:
-                            #ff6666;"&gt;</div>
-                        <p>Red sci-fi interface with negative value</p>
+                        <code class="code-block">&lt;hit-counter value="2029" is-retro="true" is-negative="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
+                            #660000;<br>--hit-counter-bg-dark:
+                            #220000;<br>--hit-counter-text-color:
+                            #ff4444;<br>--hit-counter-negative-color:
+                            #ff6666;<br>--hit-counter-border-color:
+                            #ef9cbe;"&gt;</code>
                     </div>
 
                     <div class="demo-card">
                         <h3>🟡 Amber CRT Monitor</h3>
                         <div class="counter-display" style="background: #2a1f00; padding: 1rem; border-radius: 8px;">
                             <hit-counter value="1985" is-retro="true" visitors="true"
-                                style="--hit-counter-bg-light: #aa6600; --hit-counter-bg-dark: #442200; --hit-counter-text-color: #ffaa00; --hit-counter-color: #ffaa00;"></hit-counter>
+                                style="--hit-counter-bg-light: #aa6600; --hit-counter-bg-dark: #442200; --hit-counter-text-color: #ffaa00;"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="1985" is-retro="true"
+                        <code class="code-block">&lt;hit-counter value="1985" is-retro="true"
                             visitors="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
                             #aa6600;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
                             #442200;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
-                            #ffaa00;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
-                            #ffaa00;"&gt;</div>
+                            #ffaa00;"&gt;</code>
                         <p>Classic amber terminal aesthetic</p>
                     </div>
 
@@ -320,7 +305,7 @@
                         <div class="counter-display">
                             <hit-counter id="default-retro-counter" value="98765" is-retro="true"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="98765" is-retro="true"&gt;</div>
+                        <code class="code-block">&lt;hit-counter value="98765" is-retro="true"&gt;</code>
                         <p>Classic beveled buttons with automatic comma formatting</p>
                     </div>
 
@@ -329,14 +314,13 @@
                         <div class="counter-display"
                             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1rem; border-radius: 8px;">
                             <hit-counter id="custom-theme-counter" value="80085" is-retro="true" visitors="true"
-                                style="--hit-counter-bg-light: #e6e6fa; --hit-counter-bg-dark: #9370db; --hit-counter-text-color: #4b0082; --hit-counter-color: #ffffff;"></hit-counter>
+                                style="--hit-counter-bg-light: #e6e6fa; --hit-counter-bg-dark: #9370db; --hit-counter-text-color: #4b0082;"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="80085" is-retro="true"
-                            visitors="true"<br>&nbsp;&nbsp;style="--hit-counter-bg-light:
-                            #e6e6fa;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-bg-dark:
-                            #9370db;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-text-color:
-                            #4b0082;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;--hit-counter-color:
-                            #ffffff;"&gt;</div>
+                        <code class="code-block">&lt;hit-counter value="80085" is-retro="true"
+                            visitors="true" style="--hit-counter-bg-light:
+                            #e6e6fa;<br>--hit-counter-bg-dark:
+                            #9370db;<br>--hit-counter-text-color:
+                            #4b0082;"&gt;</code>
                         <p>Purple gradient with custom CSS variables</p>
                     </div>
 
@@ -344,12 +328,11 @@
                         <h3>⚡ Large Retro Display</h3>
                         <div class="counter-display">
                             <hit-counter id="large-retro-counter" value="42000" is-retro="true"
-                                style="--hit-counter-font-size: 2rem; font-size: 2rem;"></hit-counter>
+                            style="--hit-counter-font-size: 2rem; font-size: 2rem;"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="42000"
-                            is-retro="true"<br>&nbsp;&nbsp;style="--hit-counter-font-size:
-                            2rem;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;font-size: 2rem;"&gt;</div>
-                        <p>Scaled up for maximum retro impact</p>
+                        <code class="code-block">&lt;hit-counter value="42000"
+                            is-retro="true" style="--hit-counter-font-size:
+                            2rem; font-size: 2rem;"&gt;</code>
                     </div>
                 </div>
             </div>
@@ -389,6 +372,24 @@
                                 <input type="checkbox" id="darkModeCheck" onchange="toggleColorScheme(this.checked)"> Dark mode
                             </label>
                         </div>
+
+                        <div class="control-group">
+                            <label>Text Color <code>--hit-counter-text-color</code></label>
+                            <input placeholder="Enter a color" type="color" id="textColorPicker" value="" onchange="updateTextColor()">
+
+                            <label>Background Color <code>--hit-counter-bg-light</code></label>
+                            <input placeholder="Enter a color" type="color" id="bgColorLightPicker" value="" onchange="updateBgLightColor()">
+
+                            <label>Background Color <code>--hit-counter-bg-dark</code></label>
+                            <input placeholder="Enter a color" type="color" id="bgColorDarkPicker" value="" onchange="updateBgDarkColor()">
+
+                            <label>Border Color <code>--hit-counter-border-color</code></label>
+                            <input placeholder="Enter a color" type="color" id="borderColorPicker" value="" onchange="updateBorderColor()">
+
+                            <label>Negative Color <code>--hit-counter-negative-color</code></label>
+                            <input placeholder="Enter a color" type="color" id="negativeColorPicker" value="" onchange="updateNegativeColor()">
+                        </div>
+
                         </form>
                     </div>
 
@@ -396,7 +397,7 @@
                         <hit-counter id="demoCounter" value="42"></hit-counter>
                     </div>
 
-                    <div class="code-block" id="codeDisplay">&lt;hit-counter value="42" &gt;&lt;/hit-counter&gt;</div>
+                    <code class="code-block" id="codeDisplay">&lt;hit-counter value="42" &gt;&lt;/hit-counter&gt;</code>
                    
                 </div>
             </div>
@@ -410,8 +411,7 @@
                         <div class="counter-display">
                             <hit-counter id="large-number-counter" value="9876543210"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="9876543210"&gt;&lt;/hit-counter&gt;</div>
-                        <p>Automatic comma formatting!</p>
+                        <code class="code-block">&lt;hit-counter value="9876543210"&gt;&lt;/hit-counter&gt;</code>
                     </div>
 
                     <div class="demo-card">
@@ -419,7 +419,7 @@
                         <div class="counter-display">
                             <hit-counter id="zero-visitors" value="0"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="0"&gt;&lt;/hit-counter&gt;</div>
+                        <code class="code-block">&lt;hit-counter value="0"&gt;&lt;/hit-counter&gt;</code>
                         <p>Special handling for zero values</p>
                     </div>
 
@@ -429,9 +429,7 @@
                       
                             <hit-counter id="1-visitor" value="1" visitors="true"></hit-counter>
                         </div>
-                        <div class="code-block"><br/>
-                            &lt;hit-counter id="1-visitor" value="1" visitors="true"&gt;&lt;/hit-counter&gt;
-                        </div>
+                        <code class="code-block">&lt;hit-counter id="1-visitor" value="1" visitors="true"&gt;&lt;/hit-counter&gt;</code>
                         <p>Handles singular/plural correctly</p>
                     </div>
 
@@ -442,10 +440,9 @@
                             <br><br/>
                             <hit-counter id="empty-input" value="" visitors="true"></hit-counter>
                         </div>
-                        <div class="code-block">&lt;hit-counter value="invalid" visitors="true"&gt;&lt;/hit-counter&gt;
+                        <code class="code-block">&lt;hit-counter value="invalid" visitors="true"&gt;&lt;/hit-counter&gt;
                             <br>
-                            &lt;hit-counter value="" visitors="true"&gt;&lt;/hit-counter&gt;
-                        </div>
+                            &lt;hit-counter value="" visitors="true"&gt;&lt;/hit-counter&gt;</code>
                         <p>Graceful error handling</p>
                     </div>
                 </div>
@@ -457,22 +454,60 @@
  <script type="module" src="./component/index.js"></script>
 
     <script>
+        const counter = document.getElementById('demoCounter');
+        const form = document.getElementById('demoForm');
+
         function toggleColorScheme(e) {
             const darkMode = e
             document.body.style.colorScheme = darkMode ? 'dark' : 'light';
         }
+
+        function updateTextColor() {
+            const customTextColor = form.textColorPicker.value;
+            
+            console.log(`🎨 Text Color: ${customTextColor}`);
+            counter.style.setProperty('--hit-counter-text-color', customTextColor);
+            updateCodeBlock();
+        }
+
+        function updateBgLightColor() {
+            const customBgLight = form.bgColorLightPicker.value;
+            
+            console.log(`🎨 Background Light: ${customBgLight}`);
+            counter.style.setProperty('--hit-counter-bg-light', customBgLight);
+            updateCodeBlock();
+        }
+
+        function updateBgDarkColor() {
+            const customBgDark = form.bgColorDarkPicker.value;
+            
+            console.log(`🎨 Background Dark: ${customBgDark}`);
+            counter.style.setProperty('--hit-counter-bg-dark', customBgDark);
+            updateCodeBlock();
+        }
+
+        function updateBorderColor() {
+            const customBorderColor = form.borderColorPicker.value;
+            
+            console.log(`🎨 Border Color: ${customBorderColor}`);
+            counter.style.setProperty('--hit-counter-border-color', customBorderColor);
+            updateCodeBlock();
+        }
+
+        function updateNegativeColor() {
+            const customNegativeColor = form.negativeColorPicker.value;
+            
+            console.log(`🎨 Negative Color: ${customNegativeColor}`);
+            counter.style.setProperty('--hit-counter-negative-color', customNegativeColor);
+            updateCodeBlock();
+        }
+
         function updateDemo() {
-            const counter = document.getElementById('demoCounter');
-            const form = document.getElementById('demoForm');
-
             const value = form.valueInput.value;
-
             const isNegative = form.negativeCheck.checked;
-
             const showVisitors = form.visitorsCheck.checked; 
-
-            const showRetro = form.retroCheck.checked; 
-
+            const showRetro = form.retroCheck.checked;
+      
             if (counter) {
                 counter.setAttribute('value', value);
                 counter.toggleAttribute('is-negative', isNegative);
@@ -485,7 +520,6 @@
         }
 
         function updateCodeBlock() {
-            const counter = document.getElementById('demoCounter');
 
             if (!counter) {
                 console.error('❌ Counter element not found in updateCodeBlock!');
@@ -493,6 +527,31 @@
             }
 
             let code = '&lt;hit-counter';
+            let style = `style="`;
+            if (counter.style.getPropertyValue('--hit-counter-text-color')) {
+                style += `--hit-counter-text-color: ${counter.style.getPropertyValue('--hit-counter-text-color')};`;
+            }
+            if (counter.style.getPropertyValue('--hit-counter-bg-light')) {
+                style += `--hit-counter-bg-light: ${counter.style.getPropertyValue('--hit-counter-bg-light')};`;
+            }
+            if (counter.style.getPropertyValue('--hit-counter-bg-dark') ) {
+                style += `--hit-counter-bg-dark: ${counter.style.getPropertyValue('--hit-counter-bg-dark')};`;
+            }
+            if (counter.style.getPropertyValue('--hit-counter-border-color') ) {
+                style += `--hit-counter-border-color: ${counter.style.getPropertyValue('--hit-counter-border-color')};`;
+            }
+            if (counter.style.getPropertyValue('--hit-counter-negative-color') ) {
+                style += `--hit-counter-negative-color: ${counter.style.getPropertyValue('--hit-counter-negative-color')};`;
+            }
+
+            if (counter.style.getPropertyValue('--hit-counter-font-size') ) {
+                style += `--hit-counter-font-size: ${counter.style.getPropertyValue('--hit-counter-font-size')};`;
+            }
+     
+            if (!style.endsWith('style="')) {
+                code += ` ${style}`;
+            }
+
             code += ` value="${counter.getAttribute('value')}"`;
 
             if (counter.hasAttribute('is-negative')) {
@@ -504,6 +563,7 @@
             if (counter.hasAttribute('is-retro')) {
                 code += ' is-retro="true"';
             }
+
             code += '&gt;&lt;/hit-counter&gt;';
 
             document.getElementById('codeDisplay').innerHTML = code;

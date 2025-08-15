@@ -39,38 +39,41 @@
 
 ### CSS Variables
 
-There are 13 variables that can be overridden.
+There are 12 variables that can be overridden.
 
 ```css
 hit-counter {
   /* Basic styling */
-  --hit-counter-color: #333;              /* Main text color */
+  --hit-counter-text-color: #333;              /* Main text color */
   --hit-counter-font-size: 1.25rem;       /* Font size */
   --hit-counter-negative-color: #e74c3c;  /* Negative sign color */
-  --hit-counter-text-color: #666;        /* "visitors" label color */
 }
 ```
 
 ### Retro Theme Variables
 ```css
 hit-counter {
+   --hit-counter-text-color: #00ff00;
+
+
   /* Beveled digit backgrounds */
   --hit-counter-bg-light: #e0e0e0;                      /* Gradient light */
   --hit-counter-bg-dark: #707070;                       /* Gradient dark */
   
   /* Digit styling */
-  --border-color: #c0c0c0;                  /* Digit border */
-  --digit-color: #000;                       /* Digit text */
-  --text-glow: 1px 1px 0 #fff, -1px -1px 0 #404040; /* Text shadow */
+  --hit-counter-border-color: #c0c0c0;                  /* Digit border */
+  --hit-counter-digit-color: #000;                       /* Digit text */
+  --hit-counter-text-glow: 1px 1px 0 #fff, -1px -1px 0 #404040; /* Text shadow */
   
   /* Shadow effects */
-  --inner-light: rgba(255,255,255,0.8);     /* Inner light shadow */
-  --inner-dark: rgba(0,0,0,0.5);            /* Inner dark shadow */
-  --outer-glow: none;                        /* Outer glow effect */
+  --hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
+  --hit-counter-inner-light: rgba(255,255,255,0.8);     /* Inner light shadow */
+  --hit-counter-inner-dark: rgba(0,0,0,0.5);            /* Inner dark shadow */
+  --hit-counter-outer-glow: none;                        /* Outer glow effect */
   
   /* Overlay effects */
-  --overlay-light: rgba(255,255,255,0.4);   /* Overlay light */
-  --overlay-dark: rgba(0,0,0,0.1);          /* Overlay dark */
+  --hit-counter-overlay-light: rgba(255,255,255,0.4);   /* Overlay light */
+  --hit-counter-overlay-dark: rgba(0,0,0,0.1);          /* Overlay dark */
 }
 ```
 
@@ -79,7 +82,7 @@ Dark mode automatically applies these values when `is-retro` is enabled:
 ```css
 /* Matrix green terminal theme */
 --hit-counter-bg-light: #2a2a2a;
---digit-color: #00ff00;
+--hit-counter-digit-color: #00ff00;
 --text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
 --outer-glow: 0 0 10px rgba(0,255,0,0.2);
 ```

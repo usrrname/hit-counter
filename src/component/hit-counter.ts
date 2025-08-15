@@ -159,12 +159,24 @@ class HitCounter extends HTMLElement {
           align-items: flex-end;
           gap: 0.25em;
         }
+        
+      /* Retro variant dark mode */
+      @media (prefers-color-scheme: dark) {
+      :host([is-retro]) {
+        --hit-counter-text-color: #00ff00;
+        --hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
+        --hit-counter-inner-light: rgba(255,255,255,0.1);
+        --hit-counter-inner-dark: rgba(0,0,0,0.8);
+        --hit-counter-outer-glow: 0 0 10px rgba(0,255,0,0.2);
+        --hit-counter-overlay-light: rgba(0,255,0,0.1);
+        --hit-counter-overlay-dark: rgba(0,0,0,0.2);
+      }
+    }
 
         :host {
-          color-scheme: light;
           font-family: 'Noto Sans', 'Roboto', sans-serif;
           font-weight: 500;
-          color: var(--hit-counter-color, #333);
+          color: var(--hit-counter-text-color, #000);
           font-size: var(--hit-counter-font-size, 1.25rem);
           line-height: 1.2;
         }
@@ -173,15 +185,18 @@ class HitCounter extends HTMLElement {
           font: bold 1em/1.2 'Fira Code', 'Monaco', monospace;
         }
         
-        :host([is-retro]) .digit,
-        :host([is-retro]) .separator {
+         .digit {
           position: relative;
           width: 1em;
           height: 1.2em;
-          background: linear-gradient(135deg, var(--hit-counter-bg-light, #e0e0e0), var(--hit-counter-bg-dark, #707070));
+        }
+        
+     
+        .digit {
+         background: linear-gradient(135deg, var(--hit-counter-bg-light, #e0e0e0), var(--hit-counter-bg-dark, #707070));
           border: 2px outset var(--hit-counter-border-color, #c0c0c0);
           border-radius: 4px;
-          color: var(--hit-counter-text-color, #000);
+          color: var(--hit-counter-text-color);
           text-shadow: var(--hit-counter-text-glow, 1px 1px 0 #fff, -1px -1px 0 #404040);
           box-shadow: 
             inset 1px 1px 2px var(--hit-counter-inner-light, rgba(255,255,255,0.8)),
@@ -189,8 +204,9 @@ class HitCounter extends HTMLElement {
             2px 2px 6px rgba(0,0,0,0.4),
             var(--hit-counter-outer-glow, none);
         }
+            
 
-        :host([is-retro]) .digit::before {
+        .digit::before {
           content: '';
           position: absolute;
           inset: 1px;
@@ -212,27 +228,6 @@ class HitCounter extends HTMLElement {
           font-size: 0.9em;
         }
 
-       /* Retro variant dark mode */
-        @media (prefers-color-scheme: dark) {
-          :host {
-            color: invert(var(--hit-counter-text-color, #333));
-          }
-          :host([is-retro]) {
-            color-scheme: dark;
-            --hit-counter-bg-light: #2a2a2a;
-            --hit-counter-bg-dark: #0a0a0a;
-            --hit-counter-border-color: #404040;
-            --hit-counter-text-color: #00ff00;
-            --hit-counter-color: #00ff00;
-            --hit-counter-text-glow: 0 0 3px currentColor, 1px 1px 0 #004400;
-            --hit-counter-inner-light: rgba(255,255,255,0.1);
-            --hit-counter-inner-dark: rgba(0,0,0,0.8);
-            --hit-counter-outer-glow: 0 0 10px rgba(0,255,0,0.2);
-            --hit-counter-overlay-light: rgba(0,255,0,0.1);
-            --hit-counter-overlay-dark: rgba(0,0,0,0.2);
-            }
-        }
-
         /* Accessibility improvements */
         @media (prefers-reduced-motion: reduce) {
           * {
@@ -251,7 +246,6 @@ class HitCounter extends HTMLElement {
             color: CanvasText;
           }
         }
-      }
       </style>
       
       <div id="inner-${id}" data-testid="test-${this.id}" class="counter-container" role="text" aria-label="${this.getAriaLabel()}">
