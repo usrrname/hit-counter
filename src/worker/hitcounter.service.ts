@@ -18,7 +18,7 @@ export default class HitCounterService {
         }
   
         const auth = new google.auth.GoogleAuth({
-            keyFile: env.GA_CREDENTIALS,
+            keyFile: JSON.parse(env.GA_CREDENTIALS),
             scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
         });
 
@@ -51,7 +51,7 @@ export default class HitCounterService {
 
             const visitors = response.data.rows?.[0]?.metricValues?.[0]?.value;
             console.log('result', response);
-            
+
             if (env.HIT_COUNTER_KV && visitors) {
                 await env.HIT_COUNTER_KV.put('uniqueVisitors', visitors ?? '0', {
                     expirationTtl: 86400, // 1 day
