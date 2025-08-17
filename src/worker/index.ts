@@ -7,7 +7,7 @@ const allowedOrigins = [
     "https://usrrname.github.io",
     "http://localhost:8787",
     "http://localhost:3000",
-    "https://jenchan.biz",
+    "https://*.jenchan.biz",
 ];
 
 function json(data: unknown, init: ResponseInit = {}) {
