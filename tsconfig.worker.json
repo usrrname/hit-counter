@@ -7,7 +7,6 @@
             "webworker"
         ],
         "strict": true,
-        "resolveJsonModule": true,
         "types": [
             "@cloudflare/workers-types",
             "google-auth-library",
@@ -17,4 +16,3 @@
         "rootDir": "./src/worker",
         "outDir": "./dist/worker"
     }
-}

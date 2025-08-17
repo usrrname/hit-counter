@@ -1,5 +1,7 @@
-import type { CfProperties, ExecutionContext, ExportedHandler, Request } from "@cloudflare/workers-types";
+import type { ExecutionContext, ExportedHandler, Request } from "@cloudflare/workers-types";
 import { default as app } from './controller';
+// @ts-ignore
+import type { Env } from './worker-configuration.d';
 
 const allowedOrigins = [
     "https://usrrname.github.io",
@@ -18,6 +20,6 @@ function json(data: unknown, init: ResponseInit = {}) {
 
 export default {
     fetch(request: Request<unknown, CfProperties<unknown>>, env: Env, ctx: ExecutionContext): Response | Promise<Response> {
-        return app.fetch(request, env, ctx);
+        return app.fetch(request, env, ctx)
     },
 } satisfies ExportedHandler<Env>;

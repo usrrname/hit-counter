@@ -1,5 +1,5 @@
 import { Context, Hono } from 'hono';
-import HitCounterService from './hitcounter.service.js';
+import HitCounterService from './hitcounter.service';
 
 const app = new Hono<{ Bindings: Env }>()
 type HitCounterContext = Context<{ Bindings: Env }>

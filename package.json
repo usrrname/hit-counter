@@ -12,12 +12,13 @@
     "start": "concurrently \"pnpm start:client\" \"pnpm start:server\"",
     "build": "tsc",
     "dev": "tsc --watch src/index.ts",
-    "lint": "tsc --noEmit",
+    "lint": "tsc --noEmit --project tsconfig.json",
     "test": "pnpm exec playwright test",
     "clean": "rimraf ./dist ./node_modules",
     "rebuild": "rimraf ./dist && tsc && cp -r dist/component public",
     "dev:worker": "wrangler dev",
-    "worker:build": "wrangler build",
+    "lint:worker": "tsc --noEmit --project tsconfig.worker.json",
+    "build:worker": "wrangler build",
     "deploy:worker": "wrangler deploy",
     "tail:worker": "wrangler tail",
     "test:worker": "vitest",
@@ -47,9 +48,7 @@
     "tsx": "^4.20.4",
     "typescript": "^5.9.2",
     "vitest": "~3.2.0",
-    "wrangler": "^4.30.0"
-  },
-  "dependencies": {
+    "wrangler": "^4.30.0",
     "googleapis": "^155.0.0",
     "hono": "^4.9.2"
   }

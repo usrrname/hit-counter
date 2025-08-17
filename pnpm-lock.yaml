@@ -7,13 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      googleapis:
-        specifier: ^155.0.0
-        version: 155.0.0
-      hono:
-        specifier: ^4.9.2
-        version: 4.9.2
     devDependencies:
       '@cloudflare/vitest-pool-workers':
         specifier: ^0.8.64
@@ -42,6 +35,12 @@ importers:
       express:
         specifier: ^5.1.0
         version: 5.1.0
+      googleapis:
+        specifier: ^155.0.0
+        version: 155.0.0
+      hono:
+        specifier: ^4.9.2
+        version: 4.9.2
       jsdom:
         specifier: ^26.1.0
         version: 26.1.0
