@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ESNext",
+        "lib": [
+            "es2022",
+            "webworker"
+        ],
+        "strict": true,
+        "resolveJsonModule": true,
+        "types": [
+            "@cloudflare/workers-types",
+            "google-auth-library",
+            "googleapis"
+        ],
+        "rootDir": "./src/worker",
+        "outDir": "./dist/worker"
+    }
+}

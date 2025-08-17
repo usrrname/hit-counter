@@ -8,9 +8,9 @@
 <script type="module" src="./component/index.js"></script>
 <hit-counter value="1234"></hit-counter>
 ```
-`pnpm start` to start the server and view the component variants at http://localhost:3000/app.html
+`pnpm start:server` to start the server with the service at http://localhost:3000/index.html
 `pnpm start:client` to view the component variants at http://localhost:3000/
-`pnpm start:server` to start the server with the service at http://localhost:3000/api
+
 
 ## 📖 Usage
 

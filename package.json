@@ -15,7 +15,11 @@
     "lint": "tsc --noEmit",
     "test": "pnpm exec playwright test",
     "clean": "rimraf ./dist ./node_modules",
-    "rebuild": "rimraf ./dist && tsc && cp -r dist/component public"
+    "rebuild": "rimraf ./dist && tsc && cp -r dist/component public",
+    "dev:worker": "wrangler dev",
+    "deploy:worker": "wrangler deploy",
+    "tail:worker": "wrangler tail",
+    "test:worker": "vitest"
   },
   "keywords": [
     "web-component",
@@ -26,6 +30,8 @@
   "author": "usrrname",
   "license": "ISC",
   "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.8.64",
+    "@cloudflare/workers-types": "^4.20250813.0",
     "@playwright/test": "^1.54.2",
     "@types/express": "^5.0.3",
     "@types/jsdom": "^21.1.7",
@@ -37,9 +43,12 @@
     "playwright": "^1.54.2",
     "rimraf": "^6.0.1",
     "tsx": "^4.20.4",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vitest": "~3.2.0",
+    "wrangler": "^4.30.0"
   },
   "dependencies": {
-    "googleapis": "^155.0.0"
+    "googleapis": "^155.0.0",
+    "hono": "^4.9.2"
   }
 }
