@@ -1,13 +1,13 @@
 import type { ExecutionContext, ExportedHandler, Request } from "@cloudflare/workers-types";
-import { default as app } from './controller';
+import { default as app } from './hitcounter.controller';
 // @ts-ignore
 import type { Env } from './worker-configuration.d';
 
 const allowedOrigins = [
     "https://usrrname.github.io",
+    "http://localhost:8787",
     "http://localhost:3000",
-    "http://localhost:3001",
-    "https://jenchan.biz"
+    "https://jenchan.biz",
 ];
 
 function json(data: unknown, init: ResponseInit = {}) {
