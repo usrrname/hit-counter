@@ -75,4 +75,9 @@ logs/
 /playwright/.cache/
 ga-credentials.json
 response.json
+
+# Files
 public/component/*
+.dev.vars
+
+.wrangler/
