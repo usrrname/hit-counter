@@ -1,15 +1,15 @@
 import { describe, expect, it, vi } from 'vitest';
-// @ts-ignore
+
 import { KVNamespaceGetOptions, KVNamespacePutOptions } from '@cloudflare/workers-types';
+// @ts-ignore
 import {
     env,
 } from "cloudflare:test";
-
-import worker, { Env } from './index';
+import worker from './index';
 vi.mock('google-auth-library', () => ({ GoogleAuth: class { } }));
 vi.mock('googleapis', () => ({ google: { analyticsdata: { properties: { runReport: async () => ({ data: { rows: [{ metricValues: [{ value: '0' }] }] } }) } } } }));
 
-const mockEnv: Env = {
+const mockEnv = {
     HIT_COUNTER_KV: {
         get: async (key: string, options?: Partial<KVNamespaceGetOptions<"text">>) => {
             console.log('get', key, options);

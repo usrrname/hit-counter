@@ -11,7 +11,8 @@
         "types": [
             "@cloudflare/workers-types",
             "google-auth-library",
-            "googleapis"
+            "googleapis",
+            "src/worker/worker-configuration.d.ts"
         ],
         "rootDir": "./src/worker",
         "outDir": "./dist/worker"

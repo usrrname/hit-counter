@@ -20,7 +20,8 @@
     "worker:build": "wrangler build",
     "deploy:worker": "wrangler deploy",
     "tail:worker": "wrangler tail",
-    "test:worker": "vitest"
+    "test:worker": "vitest",
+    "typegen": "wrangler types --path src/worker/worker-configuration.d.ts"
   },
   "keywords": [
     "web-component",

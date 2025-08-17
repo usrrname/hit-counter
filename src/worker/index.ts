@@ -1,11 +1,5 @@
-import type { CfProperties, ExecutionContext, ExportedHandler, KVNamespace, Request } from "@cloudflare/workers-types";
+import type { CfProperties, ExecutionContext, ExportedHandler, Request } from "@cloudflare/workers-types";
 import { default as app } from './controller';
-
-export interface Env {
-    HIT_COUNTER_KV: KVNamespace;
-    GA4_PROPERTY_ID: string;
-    GA_CREDENTIALS: string;
-}
 
 const allowedOrigins = [
     "https://usrrname.github.io",

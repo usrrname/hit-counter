@@ -1,7 +1,4 @@
 import { analyticsdata_v1beta, google } from 'googleapis';
-import { Env } from './index.js';
-
-
 
 export default class HitCounterService {
 
@@ -54,6 +51,7 @@ export default class HitCounterService {
 
             const visitors = response.data.rows?.[0]?.metricValues?.[0]?.value;
             console.log('result', response);
+            
             if (env.HIT_COUNTER_KV && visitors) {
                 await env.HIT_COUNTER_KV.put('uniqueVisitors', visitors ?? '0', {
                     expirationTtl: 86400, // 1 day
