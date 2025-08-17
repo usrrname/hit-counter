@@ -17,6 +17,7 @@
     "clean": "rimraf ./dist ./node_modules",
     "rebuild": "rimraf ./dist && tsc && cp -r dist/component public",
     "dev:worker": "wrangler dev",
+    "worker:build": "wrangler build",
     "deploy:worker": "wrangler deploy",
     "tail:worker": "wrangler tail",
     "test:worker": "vitest"
