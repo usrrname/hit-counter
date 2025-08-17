@@ -2,6 +2,9 @@
 
 *A web component and service for displaying site visits from Google Analytics* ✨
 
+<img width="1428" height="735" alt="2" src="https://github.com/user-attachments/assets/91c53d96-d110-4121-ac45-11d94f8c3beb" />
+
+
 ## 🚀 Quick Start
 
 ```html
