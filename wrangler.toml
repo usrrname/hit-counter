@@ -1,7 +1,11 @@
 name = "hit-counter-worker"
 main = "src/worker/index.ts"
-compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-09-23"
+
+# top level environment
+[vars]
+API_HOST = "https://hit-counter.jenchan.biz"
 
 [[kv_namespaces]]
 binding = "HIT_COUNTER_KV"
@@ -12,4 +16,4 @@ preview_id = "hit-counter-preview"
 enabled = true
 
 [env.dev]
-vars = { API_BASE = "http://localhost:8787" }
+vars = { API_HOST = "http://localhost:8787" }
