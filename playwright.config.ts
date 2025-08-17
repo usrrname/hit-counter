@@ -13,6 +13,7 @@ dotenv.config({ path: path.resolve(process.cwd(), '.env') });
  */
 export default defineConfig({
   testDir: './src',
+  testMatch: /.*\.spec\.ts$/,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
