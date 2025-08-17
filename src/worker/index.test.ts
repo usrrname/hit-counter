@@ -1,9 +1,8 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import { KVNamespaceGetOptions, KVNamespacePutOptions } from '@cloudflare/workers-types';
-// @ts-ignore
 import {
-    env,
+    env, // @ts-ignore
 } from "cloudflare:test";
 import worker from './index';
 vi.mock('google-auth-library', () => ({ GoogleAuth: class { } }));
@@ -55,7 +54,7 @@ describe('worker', () => {
             }
         });
         const response = await worker.fetch(request, mockEnv, env);
-        const body = await response.json();
-        expect(body.visitors).toBe(0);
+        const body = await response.text();
+        expect(body).toBe('0');
     });
 });
