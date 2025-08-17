@@ -34,10 +34,12 @@
         "emitDecoratorMetadata": true
     },
     "include": [
-        "src/**/*",
+        "src/component/**/*",
+        "src/service/**/*",
         "public/**/*"
     ],
     "exclude": [
+        "src/worker",
         "node_modules",
         "dist",
         "**/*.test.ts",
