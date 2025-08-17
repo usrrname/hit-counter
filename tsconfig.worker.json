@@ -16,3 +16,4 @@
         "rootDir": "./src/worker",
         "outDir": "./dist/worker"
     }
+}
