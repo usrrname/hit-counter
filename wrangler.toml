@@ -10,7 +10,6 @@ API_HOST = "https://hit-counter.jenchan.biz"
 [[kv_namespaces]]
 binding = "HIT_COUNTER_KV"
 id = "4cb8e06d1d82414f9878ddffb67f9888"
-preview_id = "hit-counter-preview"
 
 [observability.logs]
 enabled = true

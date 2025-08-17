@@ -18,7 +18,7 @@ export default class HitCounterService {
         }
   
         const auth = new google.auth.GoogleAuth({
-            keyFile: JSON.parse(env.GA_CREDENTIALS),
+            keyFile: env.GA_CREDENTIALS,
             scopes: ['https://www.googleapis.com/auth/analytics.readonly'],
         });
 
