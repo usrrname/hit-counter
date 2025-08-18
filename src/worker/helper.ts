@@ -12,3 +12,9 @@ export function appendHeaders(data: unknown, init: ResponseInit = {}) {
     };
     return new Response(JSON.stringify(data), { ...init, headers: { ...headers, ...(init.headers || {}) } });
 }
+
+export const logHeaders = (request: Request) => {
+    let headersObject = Object.fromEntries(request.headers);
+    let requestHeaders = JSON.stringify(headersObject, null, 2);
+    console.log(`Request headers: ${requestHeaders}`);
+}
