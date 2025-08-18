@@ -4,8 +4,8 @@ import { default as app } from './hitcounter.controller';
 import type { Env } from './worker-configuration.d';
 
 export default {
-    ...app,
-    fetch(request: Request<unknown, CfProperties<unknown>>, env: Env, ctx: ExecutionContext){
+    fetch(request: Request, env: Env, ctx: ExecutionContext) {
+        //@ts-ignore
         return app.fetch(request, env, ctx)
     }
 }
