@@ -28,10 +28,12 @@ app.use(express.static(path.resolve(__dirname, '../../public')));
 // Add debugging middleware
 app.use((req, res, next) => {
     if (req.method !== 'GET' ) {
-        return res.status(405).json({ error: 'Method not allowed' });
+        res.status(405).json({ error: 'Method not allowed' });
+        return;
     }
     if (!['/', '/app', '/health', '/api'].includes(req.url)) {
-        return res.status(404).json({ error: 'Not found' });
+        res.status(404).json({ error: 'Not found' });
+        return;
     }
     next();
 });
